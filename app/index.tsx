@@ -20,7 +20,7 @@ export default function Home() {
             renderItem={({ item }) => (
               <Link
                 asChild
-                href={{ pathname: '/music', params: { mood: item } }}
+                href={{ pathname: '/(music)', params: { mood: item } }}
                 key={item}
                 className="mx-2.5">
                 <Pressable className="size-20 items-center justify-center rounded-full bg-secondary">

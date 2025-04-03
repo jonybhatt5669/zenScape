@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { Stack, useLocalSearchParams } from 'expo-router';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import { Link, Stack, useLocalSearchParams } from 'expo-router';
 import { View, Text, Image, Pressable, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -51,7 +52,7 @@ interface Track {
 export default function MusicScreen() {
   const { mood } = useLocalSearchParams();
   const renderTrack = ({ item }: { item: Track }) => (
-    <View className="flex-row items-center rounded bg-secondary px-4 py-2">
+    <View className="bg-secondary-900 flex-row items-center rounded px-4 py-2">
       {/* Album Art */}
       <Image source={{ uri: item.image }} className="mr-4 h-12 w-12 rounded" />
       {/* Track Info */}
@@ -60,9 +61,16 @@ export default function MusicScreen() {
         <Text className="text-sm text-gray-400">{item.artist}</Text>
       </View>
       {/* Play Button */}
-      <Pressable className="size-14 items-center justify-center rounded-full bg-neutral ">
-        <Text className="text-center text-2xl text-[#191919]">▶</Text>
-      </Pressable>
+      <Link
+        href={{
+          pathname: '/(music)/music-player',
+          params: { title: item.title, artist: item.artist, image: item.image },
+        }}
+        asChild>
+        <Pressable className="bg-primary-50 size-12 items-center justify-center rounded-full ">
+          <AntDesign name="caretright" size={16} color="white" />
+        </Pressable>
+      </Link>
     </View>
   );
 
@@ -71,7 +79,7 @@ export default function MusicScreen() {
       <Stack.Screen
         options={{
           headerStyle: {
-            backgroundColor: '#6d6d6d',
+            backgroundColor: '#1f1f20',
           },
           headerTintColor: '#fff',
           title: 'Playlists',

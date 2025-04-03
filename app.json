@@ -3,31 +3,30 @@
     "name": "zenScape",
     "slug": "zenScape",
     "version": "1.0.0",
-
     "scheme": "zenScape",
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/logo_black.png"
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router"
+    ],
     "experiments": {
       "typedRoutes": true,
-
       "tsconfigPaths": true
     },
-
-    "orientation": "portrait", 
+    "orientation": "portrait",
     "icon": "./assets/images/logo_black.png",
-
     "userInterfaceStyle": "light",
-
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -35,7 +34,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/logo_white.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.jony5669.zenScape"
     }
   }
 }

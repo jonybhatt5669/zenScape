@@ -1,4 +1,5 @@
 import { Link, Stack } from 'expo-router';
+
 import { FlatList, Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 

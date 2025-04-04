@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <>
       <Stack.Screen options={{ headerShown: false }} />
-      <SafeAreaView className="flex-1 bg-primary p-4">
-        <Text className="mb-4 text-4xl font-bold text-neutral">How is your mood now?</Text>
+      <SafeAreaView className="flex-1 bg-primary-400 p-4">
+        <Text className="mb-4 text-4xl font-bold text-neutral-200">How is your mood now?</Text>
         {/** Mood selection */}
         <View className="flex-row flex-wrap justify-between gap-4 ">
           <FlatList
@@ -23,8 +23,8 @@ export default function Home() {
                 href={{ pathname: '/(music)', params: { mood: item } }}
                 key={item}
                 className="mx-2.5">
-                <Pressable className="size-20 items-center justify-center rounded-full bg-secondary">
-                  <Text className="text-lg font-semibold text-neutral">{item}</Text>
+                <Pressable className="size-20 items-center justify-center rounded-full bg-secondary-800">
+                  <Text className="text-lg font-semibold text-neutral-100">{item}</Text>
                 </Pressable>
               </Link>
             )}

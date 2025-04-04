@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Audio } from 'expo-av';
-import { useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 export default function MusicPlayer() {
@@ -64,7 +64,16 @@ export default function MusicPlayer() {
   const progress = duration ? (position / duration) * 100 : 0;
 
   return (
-    <View className="flex-1 items-center justify-center bg-primary p-4">
+    <View className="flex-1 items-center justify-center bg-primary-400 p-4">
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: '#1f1f20',
+          },
+          headerTintColor: '#fff',
+          title: 'Song',
+        }}
+      />
       {/** Album Art */}
       <View className="mb-6 h-64 w-64 rounded-lg">
         <Image
@@ -73,18 +82,18 @@ export default function MusicPlayer() {
         />
       </View>
       {/** Song Info */}
-      <View>
-        <Text className="text-2xl font-bold">{title}</Text>
-        <Text className="text-2xl font-medium">{artist}</Text>
+      <View className="mb-6 justify-center text-center">
+        <Text className="text-2xl font-bold text-neutral-200">{title}</Text>
+        <Text className="text-center text-xl font-medium text-neutral-700/80">{artist}</Text>
       </View>
       {/** Progress Bar */}
       <View className="mb-6 w-full px-4">
         <View className="mb-2 flex-row justify-between">
-          <Text className="text-sm text-neutral">{formatTime(position)}</Text>
-          <Text className="text-sm text-neutral">{formatTime(duration)}</Text>
+          <Text className="text-neutral text-sm">{formatTime(position)}</Text>
+          <Text className="text-neutral text-sm">{formatTime(duration)}</Text>
         </View>
         <View className="h-1 w-full rounded-full">
-          <View className="h-1 rounded-full bg-neutral" style={{ width: `${progress}%` }} />
+          <View className="h-1 rounded-full bg-neutral-100" style={{ width: `${progress}%` }} />
         </View>
       </View>
       {/* Playback Controls */}

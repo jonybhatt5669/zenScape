@@ -1,60 +1,22 @@
-/* eslint-disable prettier/prettier */
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { Link, Stack, useLocalSearchParams } from 'expo-router';
 import { View, Text, Image, Pressable, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const staticTracks = [
-  {
-    id: '1',
-    title: 'PROTECTION CHARM',
-    artist: 'MIGUEL ANGELES',
-    image:
-      'https://images.unsplash.com/photo-1575285113814-f770cb8c796e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzaWMlMjBhcnRpc3R8ZW58MHx8MHx8fDA%3D',
-  },
-  {
-    id: '2',
-    title: 'KEEP UP // FROSTB...',
-    artist: 'ODETARI',
-    image:
-      'https://images.unsplash.com/photo-1592685530128-2f32bf8fe0fb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  },
-  { id: '3', title: 'void', artist: 'ISQ', image: 'https://via.placeholder.com/50' },
-  {
-    id: '4',
-    title: "SHE'LL KILL YOU",
-    artist: "L'ORCHESTRE CINEMATIQUE",
-    image: 'https://via.placeholder.com/50',
-  },
-  {
-    id: '5',
-    title: 'Up In The What?',
-    artist: 'FTR Melo',
-    image: 'https://via.placeholder.com/50',
-  },
-  {
-    id: '6',
-    title: 'Me and the Devil',
-    artist: 'Rythmrebel',
-    image: 'https://via.placeholder.com/50',
-  },
-  { id: '7', title: 'Aleph', artist: 'Gesaffelstein', image: 'https://via.placeholder.com/50' },
-  { id: '8', title: 'Tyler', artist: 'angfun', image: 'https://via.placeholder.com/50' },
-  { id: '9', title: 'Electro World', artist: 'Perfume', image: 'https://via.placeholder.com/50' },
-];
+import library from '../../assets/data/library.json';
 
-interface Track {
-  id: string;
-  title: string;
-  artist: string;
-  image: string;
-}
+import { unknownAlbumImageUri } from '~/src/constants/images';
+import { IMusicTrack } from '~/src/interfaces/MusicTrackInterface';
+
 export default function MusicScreen() {
   const { mood } = useLocalSearchParams();
-  const renderTrack = ({ item }: { item: Track }) => (
-    <View className="bg-secondary-900 flex-row items-center rounded px-4 py-2">
+  const renderTrack = ({ item }: { item: IMusicTrack }) => (
+    <View className="flex-row items-center rounded bg-secondary-900 px-4 py-2">
       {/* Album Art */}
-      <Image source={{ uri: item.image }} className="mr-4 h-12 w-12 rounded" />
+      <Image
+        source={{ uri: item.artwork ? item.artwork : unknownAlbumImageUri }}
+        className="mr-4 h-12 w-12 rounded"
+      />
       {/* Track Info */}
       <View className="flex-1">
         <Text className="text-base font-semibold text-white">{item.title}</Text>
@@ -64,10 +26,14 @@ export default function MusicScreen() {
       <Link
         href={{
           pathname: '/(music)/music-player',
-          params: { title: item.title, artist: item.artist, image: item.image },
+          params: {
+            title: item.title,
+            artist: item.artist,
+            image: item.artwork ? item.artwork : unknownAlbumImageUri,
+          },
         }}
         asChild>
-        <Pressable className="bg-primary-50 size-12 items-center justify-center rounded-full ">
+        <Pressable className="size-12 items-center justify-center rounded-full bg-primary-50 ">
           <AntDesign name="caretright" size={16} color="white" />
         </Pressable>
       </Link>
@@ -75,7 +41,7 @@ export default function MusicScreen() {
   );
 
   return (
-    <SafeAreaView className="flex-1 bg-primary">
+    <SafeAreaView className="flex-1 bg-primary-400">
       <Stack.Screen
         options={{
           headerStyle: {
@@ -86,16 +52,16 @@ export default function MusicScreen() {
         }}
       />
       <View className="border-b border-gray-700 p-4">
-        <Text className="text-3xl font-semibold text-neutral">Music for {mood}</Text>
+        <Text className="text-3xl font-semibold text-neutral-100">Music for {mood}</Text>
       </View>
       <FlatList
-        data={staticTracks}
+        data={library}
         style={{
           gap: 4,
           marginHorizontal: 10,
         }}
         renderItem={renderTrack}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.url}
         contentContainerStyle={{
           paddingVertical: 10,
           gap: 6,

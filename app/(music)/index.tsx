@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import library from '../../assets/data/library.json';
 
+import FloatingPlayer from '~/src/components/FloatingPlayer';
 import { unknownAlbumImageUri } from '~/src/constants/images';
 import { useNavigationSearch } from '~/src/hooks/useNavigationSearch';
 import { IMusicTrack } from '~/src/interfaces/MusicTrackInterface';
@@ -71,7 +72,7 @@ export default function MusicScreen() {
           headerShadowVisible: false,
         }}
       />
-      <SafeAreaView className="flex-1 bg-primary-400 ">
+      <SafeAreaView className="relative flex-1 bg-primary-400 ">
         {/* <View className="border-b border-gray-700 p-4">
         <Text className="text-3xl font-semibold text-neutral-100">Music for {mood}</Text>
       </View> */}
@@ -81,6 +82,7 @@ export default function MusicScreen() {
           style={{
             gap: 4,
             marginHorizontal: 10,
+            flex: 1,
           }}
           renderItem={renderTrack}
           keyExtractor={(item) => item.url}
